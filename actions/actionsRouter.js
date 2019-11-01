@@ -33,7 +33,8 @@ router.get('/:id', validateActionId, (req, res) => {
 // post ##########################
 router.post('/', (req, res) => {
    const action = req.body;
-   db.insert(action)
+   actionDB
+      .insert(action)
       .then(act => {
          res.status(200).json(act);
       })
@@ -45,7 +46,8 @@ router.post('/', (req, res) => {
 // Delete ####################
 router.delete('/:id', validateActionId, (req, res) => {
    const id = req.params.id;
-   db.remove(id)
+   actionDB
+      .remove(id)
       .then(act => {
          res.status(200).json({ message: 'Action Deleted' });
       })
@@ -59,7 +61,8 @@ router.delete('/:id', validateActionId, (req, res) => {
 router.put('/:id', (req, res) => {
    const id = req.params.id;
    const changes = req.body;
-   db.update(id, changes)
+   actionDB
+      .update(id, changes)
       .then(updated => {
          res.status(200).json(updated);
       })
